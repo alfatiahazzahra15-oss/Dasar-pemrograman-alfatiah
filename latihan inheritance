@@ -1,0 +1,64 @@
+class Person:
+    def __init__(self, nama, umur):
+        self.nama = nama
+        self.umur = umur
+
+    def info(self):
+        print(f"Nama: {self.nama}")
+        print(f"Umur: {self.umur}")
+
+
+class Student(Person):
+    def __init__(self, nama, umur, nis, kelas):
+        super().__init__(nama, umur)
+        self.nis = nis
+        self.kelas = kelas
+        self.nilai = []
+
+    def tambah_nilai(self, nilai):
+        self.nilai.append(nilai)
+
+    def rata_rata(self):
+        if len(self.nilai) == 0:
+            return 0
+        return sum(self.nilai) / len(self.nilai)
+
+    def info(self):
+        super().info()
+        print(f"NIS: {self.nis}")
+        print(f"Kelas: {self.kelas}")
+        print(f"Rata-rata nilai: {self.rata_rata():.2f}")
+
+
+class Teacher(Person):
+    def __init__(self, nama, umur, mapel, gaji):
+        super().__init__(nama, umur)
+        self.mapel = mapel
+        self.gaji = gaji
+
+    def naik_gaji(self, jumlah):
+        self.gaji += jumlah
+
+    def info(self):
+        super().info()
+        print(f"Mata pelajaran: {self.mapel}")
+        print(f"Gaji: Rp{self.gaji}")
+
+
+# ======================
+# Program utama
+# ======================
+
+s1 = Student("Andi", 16, "12345", "10A")
+s1.tambah_nilai(80)
+s1.tambah_nilai(90)
+s1.tambah_nilai(85)
+
+t1 = Teacher("Pak Budi", 40, "Matematika", 5000000)
+t1.naik_gaji(500000)
+
+print("=== DATA SISWA ===")
+s1.info()
+
+print("\n=== DATA GURU ===")
+t1.info()
